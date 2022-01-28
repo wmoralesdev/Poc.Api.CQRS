@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Poc.Api.Application.TodoItemLists.Common.ViewModels;
 using Poc.Api.Application.TodoItems.Common.ViewModels;
 using Poc.Api.Domain.Entities.Todo;
 

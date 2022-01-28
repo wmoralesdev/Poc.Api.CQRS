@@ -5,11 +5,13 @@ namespace Poc.Api.Domain.Context;
 
 public class TodoDbContext : DbContext
 {
-    public DbSet<TodoItem>? Todos { get; set; }
-
     public TodoDbContext(DbContextOptions options) : base(options)
     {
     }
+
+    public DbSet<TodoItem>? TodoItems { get; set; }
+
+    public DbSet<TodoItemList>? TodoItemLists { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

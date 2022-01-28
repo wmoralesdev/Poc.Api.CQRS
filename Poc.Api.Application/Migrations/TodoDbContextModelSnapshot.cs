@@ -45,12 +45,42 @@ namespace Poc.Api.Application.Migrations
                     b.Property<string>("ToDo")
                         .HasColumnType("text");
 
+                    b.Property<int?>("TodoItemListId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Todos");
+                    b.HasIndex("TodoItemListId");
+
+                    b.ToTable("TodoItems");
+                });
+
+            modelBuilder.Entity("Poc.Api.Domain.Entities.Todo.TodoItemList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TodoItemLists");
+                });
+
+            modelBuilder.Entity("Poc.Api.Domain.Entities.Todo.TodoItem", b =>
+                {
+                    b.HasOne("Poc.Api.Domain.Entities.Todo.TodoItemList", null)
+                        .WithMany("Items")
+                        .HasForeignKey("TodoItemListId");
+                });
+
+            modelBuilder.Entity("Poc.Api.Domain.Entities.Todo.TodoItemList", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

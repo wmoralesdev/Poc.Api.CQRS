@@ -5,5 +5,4 @@ namespace Poc.Api.Application.TodoItems.Queries.GetAllTodosQuery;
 
 public class GetAllTodosQuery : IRequest<List<TodoItemVm>>
 {
-    
 }

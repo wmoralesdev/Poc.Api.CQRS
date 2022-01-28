@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Poc.Api.Application.TodoItems.Common.ViewModels;
@@ -11,7 +10,7 @@ public class GetAllTodosQueryHandler : IRequestHandler<GetAllTodosQuery, List<To
 {
     private readonly TodoDbContext _ctx;
     private readonly IMapper _mapper;
-    
+
     public GetAllTodosQueryHandler(TodoDbContext ctx, IMapper mapper)
     {
         _ctx = ctx;
@@ -21,7 +20,7 @@ public class GetAllTodosQueryHandler : IRequestHandler<GetAllTodosQuery, List<To
     public async Task<List<TodoItemVm>> Handle(GetAllTodosQuery request, CancellationToken cancellationToken)
     {
         var items = await _mapper.ProjectTo<TodoItemVm>(
-            _ctx.Todos!.OrderBy(t => t.Id)
+            _ctx.TodoItems!.OrderBy(t => t.Id)
         ).ToListAsync(cancellationToken);
 
         return items;
